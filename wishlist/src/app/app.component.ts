@@ -8,9 +8,9 @@ import { WishItem } from "../shared/models/wishItem";
 })
 export class AppComponent {
   title = 'My Wishlist';
-  items = [
-    new WishItem('Learn Angular'),
-    new WishItem('Get Coffee', true),
-    new WishItem('Find grass that cuts itself')
+  items : WishItem[] = [
+    // new WishItem('Learn Angular'),
+    // new WishItem('Get Coffee', true),
+    // new WishItem('Find grass that cuts itself')
   ]
 }
