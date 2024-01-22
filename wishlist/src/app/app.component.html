@@ -6,7 +6,6 @@
 
   <ng-template #showItems>
     <ul class="wish-list">
-      <!--  directive-->
       <li *ngFor="let item of items; index as ii">
         <div class="form-check">
           <label class="form-check-label">
@@ -14,8 +13,8 @@
               class="checkbox"
               type="checkbox"
               [checked]="item.isComplete"
-<!--              binding to custom html attribute-->
-              [attr.data-index]="ii">
+              [attr.data-index]="ii"
+              (click)="toggleItem(item)">
             {{ item.wishText }}
           </label>
         </div>

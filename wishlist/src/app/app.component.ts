@@ -13,4 +13,9 @@ export class AppComponent {
     new WishItem('Get Coffee', true),
     new WishItem('Find grass that cuts itself')
   ]
+
+  toggleItem(item : WishItem) {
+    item.isComplete = !item.isComplete;
+    console.log(item);
+  }
 }
