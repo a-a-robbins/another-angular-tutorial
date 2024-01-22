@@ -7,10 +7,16 @@
   <ng-template #showItems>
     <ul class="wish-list">
       <!--  directive-->
-      <li *ngFor="let item of items">
+      <li *ngFor="let item of items; index as ii">
         <div class="form-check">
           <label class="form-check-label">
-            <input class="checkbox" type="checkbox"> {{ item.wishText }}
+            <input
+              class="checkbox"
+              type="checkbox"
+              [checked]="item.isComplete"
+<!--              binding to custom html attribute-->
+              [attr.data-index]="ii">
+            {{ item.wishText }}
           </label>
         </div>
       </li>
