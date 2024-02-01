@@ -25,12 +25,6 @@ export class AppComponent {
   get visibleItems(): WishItem[] {
     return this.items.filter(filters[this.listFilter]);
   }
-
-  toggleItem(item: WishItem) {
-    item.isComplete = !item.isComplete;
-    console.log(item);
-  }
-
   addNewWish() {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = "";
