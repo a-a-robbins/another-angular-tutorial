@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
-import { WishItem } from "../shared/models/wishItem";
+import {Component} from '@angular/core';
+import {WishItem} from "../shared/models/wishItem";
+import {filter} from "rxjs";
 
+const filters = [
+  (item : WishItem) => item,
+  (item : WishItem) => !item.isComplete,
+  (item : WishItem) => item.isComplete
+];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,16 +14,19 @@ import { WishItem } from "../shared/models/wishItem";
 })
 export class AppComponent {
   title = 'My Wishlist';
-  items : WishItem[] = [
+  items: WishItem[] = [
     new WishItem('Learn Angular'),
     new WishItem('Get Coffee', true),
     new WishItem('Find grass that cuts itself')
   ];
-  listFilter = "0";
+  listFilter : any = "0";
   newWishText = "";
-  visibleItems: WishItem[] = this.items;
 
-  toggleItem(item : WishItem) {
+  get visibleItems(): WishItem[] {
+    return this.items.filter(filters[this.listFilter]);
+  }
+
+  toggleItem(item: WishItem) {
     item.isComplete = !item.isComplete;
     console.log(item);
   }
@@ -25,17 +34,5 @@ export class AppComponent {
   addNewWish() {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = "";
-  }
-
-  filterChanged(value: any) {
-    if(value === "0") {
-      this.visibleItems == this.items;
-    }
-    else if(value === "1") {
-      this.visibleItems = this.items.filter(item => !item.isComplete);
-    }
-    else {
-      this.visibleItems = this.items.filter(item => item.isComplete);
-    }
   }
 }
