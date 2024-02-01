@@ -9,11 +9,13 @@ import { WishItem } from "../shared/models/wishItem";
 export class AppComponent {
   title = 'My Wishlist';
   items : WishItem[] = [
-    // new WishItem('Learn Angular'),
-    // new WishItem('Get Coffee', true),
-    // new WishItem('Find grass that cuts itself')
-  ]
-  newWishText = ""
+    new WishItem('Learn Angular'),
+    new WishItem('Get Coffee', true),
+    new WishItem('Find grass that cuts itself')
+  ];
+  listFilter = "0";
+  newWishText = "";
+  visibleItems: WishItem[] = this.items;
 
   toggleItem(item : WishItem) {
     item.isComplete = !item.isComplete;
@@ -23,5 +25,17 @@ export class AppComponent {
   addNewWish() {
     this.items.push(new WishItem(this.newWishText));
     this.newWishText = "";
+  }
+
+  filterChanged(value: any) {
+    if(value === "0") {
+      this.visibleItems == this.items;
+    }
+    else if(value === "1") {
+      this.visibleItems = this.items.filter(item => !item.isComplete);
+    }
+    else {
+      this.visibleItems = this.items.filter(item => item.isComplete);
+    }
   }
 }
